@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd"
+         version="3.1">
+ 
+    <enterprise-beans>
+      
+        <session>
+            <ejb-name>MailSessionFactoryBean</ejb-name>
+            <ejb-class>cz.vse.webmail.MailSessionFactoryBean</ejb-class>
+            <env-entry>
+                <env-entry-name>username</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>mailserver4it447@gmail.com</env-entry-value>
+            </env-entry>
+            <env-entry>
+                <env-entry-name>password</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>tajneheslo</env-entry-value>
+            </env-entry>
+            <env-entry>
+                <env-entry-name>host</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>smtp.gmail.com</env-entry-value>
+            </env-entry>
+            <env-entry>
+                <env-entry-name>socketFactoryPort</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>465</env-entry-value>
+            </env-entry>
+            <env-entry>
+                <env-entry-name>socketFactoryClass</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>javax.net.ssl.SSLSocketFactory</env-entry-value>
+            </env-entry>
+            <env-entry>
+                <env-entry-name>auth</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>true</env-entry-value>
+            </env-entry>
+            <env-entry>
+                <env-entry-name>port</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>465</env-entry-value>
+            </env-entry>
+        </session>
+    </enterprise-beans>
+</ejb-jar>
