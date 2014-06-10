@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.vse.webmail;
 
 import java.util.Properties;
@@ -16,7 +10,7 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 
 /**
- *
+ * Bean which is focusing on creating Mail Session based on the configuration in ejb-jar.xml
  * @author Petr
  */
 @Stateless
@@ -41,7 +35,7 @@ public class MailSessionFactoryBean {
     private String port;
     
     @PostConstruct
-    public void init() {
+    private void init() {
         Properties properties = new Properties();
         properties.put("mail.smtp.host", host);
         properties.put("mail.smtp.socketFactory.port", socketFactoryPort);
@@ -56,11 +50,18 @@ public class MailSessionFactoryBean {
             });
     }
     
+    /**
+     * Cleans resource before destroying this bean
+     */
     @PreDestroy
     public void close() {
         session = null;
     }
 
+    /** 
+     * Returns ready to use Mail Session
+     * @return mail session
+     */
     public Session getMailSession() {
         return session;
     }

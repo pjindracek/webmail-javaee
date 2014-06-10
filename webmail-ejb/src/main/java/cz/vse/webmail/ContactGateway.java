@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.vse.webmail;
 
 import cz.vse.webmail.domain.Contact;
@@ -18,7 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- *
+ * Makes easier access to Contact entity
  * @author Petr
  */
 @Stateful
@@ -32,14 +26,19 @@ public class ContactGateway {
     private User user;
     private Contact contact;
     
-    public Contact findContact(String email) {
-        return contactDAO.findContact(user, email);
-    }
-    
+    /**
+     * Finds contact with given ID
+     * @param contactId contact ID
+     * @return found contact
+     */
     public Contact findContact(Integer contactId) {
         return contactDAO.findContact(user, contactId);
     }
     
+    /**
+     * Adds new Contact or updates exisiting one
+     * @param contact contact
+     */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void addOrUpdateContact(Contact contact) {
         if (contact.getId() == null) {
@@ -50,23 +49,43 @@ public class ContactGateway {
         }
     }
     
+    /**
+     * Returns contact which was previously added or updated
+     * @return current contact
+     */
     public Contact getCurrentContact() {
         return contact;
     }
 
+    /**
+     * Deletes contact with given ID
+     * @param contactId contact ID
+     */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void deleteContact(Integer contactId) {
         entityManager.remove(findContact(contactId));
     }
     
+    /**
+     * Gets user who was previously added to this bean
+     * @return user of this bean
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Sets user of this bean
+     * @param user user
+     */
     public void setUser(User user) {
         this.user = user;
     }
     
+    /**
+     * Cleans up the resources and returns ID of the used contact
+     * @return 
+     */
     @Remove
     public Integer close() {
         entityManager.flush();

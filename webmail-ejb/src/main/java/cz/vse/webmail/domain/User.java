@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.vse.webmail.domain;
 
 import java.io.Serializable;
@@ -18,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- *
+ * Represents user of the application
  * @author Petr
  */
 @Entity
@@ -38,73 +32,142 @@ public class User implements Serializable {
     private Set<Contact> contacts = new HashSet<Contact>();
     private String password;
 
+    /**
+     * Gets ID of the user.
+     * @return ID
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * Sets ID of the user
+     * @param id ID
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * Returns email address of the user
+     * @return email address
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Sets email address of the user
+     * @param email email address
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Gets name of the user
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name of the user
+     * @param name name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets surname of the user
+     * @return surname
+     */
     public String getSurname() {
         return surname;
     }
 
+    /**
+     * Sets surname of the user
+     * @param surname surname
+     */
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
+    /**
+     * Gets emails of the user
+     * @return user's emails
+     */
     public Set<Email> getEmails() {
         return emails;
     }
 
+    /**
+     * Sets emails of the user
+     * @param emails emails
+     */
     public void setEmails(Set<Email> emails) {
         this.emails = emails;
     }
 
+    /**
+     * Gets contacts of the user
+     * @return contacts
+     */
     public Set<Contact> getContacts() {
         return contacts;
     }
 
+    /**
+     * Sets contacts of the user
+     * @param contacts contacts
+     */
     public void setContacts(Set<Contact> contacts) {
         this.contacts = contacts;
     }
     
+    /**
+     * Gets full name consistin of name and surname
+     * @return name and surname
+     */
     public String getFullName() {
         return name + " " + surname;
     }
 
+    /**
+     * Gets password of user
+     * @return password
+     */
     public String getPassword() {
         return password;
     }
-
+    
+    /**
+     * Sets password of user
+     * @param password password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * Hashcode
+     * @return hashcode
+     */
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
-
+    
+    /**
+     * Equals
+     * @param object other object
+     * @return true if IDs are the same 
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -118,6 +181,10 @@ public class User implements Serializable {
         return true;
     }
 
+    /**
+     * String representation of the object
+     * @return string representation
+     */
     @Override
     public String toString() {
         return "cz.vse.webmail.domain.User[ id=" + id + " ]";

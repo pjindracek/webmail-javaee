@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.vse.webmail.web;
 
 import cz.vse.webmail.domain.User;
@@ -18,7 +12,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import static org.junit.Assert.*;
 import org.springframework.mock.web.MockHttpServletResponse;
 /**
- *
+ * Tests for AbstractController
  * @author Petr
  */
 public class AbstractControllerTest {
@@ -76,6 +70,9 @@ public class AbstractControllerTest {
         assertEquals(controller.getCurrentUser(request), user);
     }
 
+    /**
+     * Implementation of the AbstractController for testing purposes
+     */
     public class AbstractControllerImpl extends AbstractController {
 
         public String getDefaultAction() {

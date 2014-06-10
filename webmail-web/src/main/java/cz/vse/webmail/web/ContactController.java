@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.vse.webmail.web;
 
 import cz.vse.webmail.ContactDAO;
@@ -21,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- *
+ * Controller processing all requests related to Contact management
  * @author Petr
  */
 @EJBs({@EJB(beanName = "ContactGateway",
@@ -43,16 +37,24 @@ public class ContactController extends AbstractController {
     @EJB(beanName="ContactDAOBean")
     private ContactDAO contactDAO;
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
-    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = getAction(request);
@@ -78,6 +80,9 @@ public class ContactController extends AbstractController {
         }
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getDefaultAction() {
         return ACTION_DEFAULT;
@@ -113,6 +118,10 @@ public class ContactController extends AbstractController {
         return contactPageBean;
     }
     
+    /**
+     * Retrieves ContactGateway from EJB
+     * @return ContactGateway bean
+     */
     protected ContactGateway retrieveContactGateway() {
         try {
             Context jndi = new InitialContext();
@@ -130,10 +139,19 @@ public class ContactController extends AbstractController {
         return contactPageBean;
     }
     
+    /**
+     * Retrieves ID of the contact from id parametr from request
+     * @param request HTTP request
+     * @return ID of the contact
+     */
     protected Integer getContactId(HttpServletRequest request) {
         return Integer.parseInt(request.getParameter("id"));
     }
     
+    /**
+     * Returns DAO of contact entity
+     * @return contact DAO
+     */
     public ContactDAO getContactDAO() {
         return contactDAO;
     }

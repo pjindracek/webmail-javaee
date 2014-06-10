@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.vse.webmail.web;
 
 import cz.vse.webmail.ContactDAO;
@@ -23,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- *
+ * Controller processing requests considering Email entity
  * @author Petr
  */
 @EJBs({
@@ -46,16 +40,25 @@ public class EmailController extends AbstractController {
     @EJB(beanName="ContactDAOBean")
     private ContactDAO contactDAO;
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = getAction(request);
@@ -94,6 +97,9 @@ public class EmailController extends AbstractController {
         }
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getDefaultAction() {
         return ACTION_DEFAULT;
@@ -134,6 +140,11 @@ public class EmailController extends AbstractController {
         request.getSession().removeAttribute(SESSION_EMAIL_PAGE_BEAN);
     }
     
+    /**
+     * Creates EmailPageBean and puts it in session or retrieves one from the session
+     * @param request HTTP request
+     * @return initialized email page bean
+     */
     protected EmailPageBean getEmailPageBean(HttpServletRequest request) {
         EmailPageBean emailPageBean = (EmailPageBean) request.getAttribute(SESSION_EMAIL_PAGE_BEAN);
         if (emailPageBean == null) {
@@ -142,10 +153,19 @@ public class EmailController extends AbstractController {
         return emailPageBean;
     }
     
+    /**
+     * Shortcut for getting email bean from email page bean
+     * @param request
+     * @return 
+     */
     protected EmailBean getEmailBean(HttpServletRequest request) {
         return getEmailPageBean(request).getEmailBean();
     }
     
+    /**
+     * Retrieves email bean from EJB container
+     * @return email bean
+     */
     protected EmailBean retrieveEmailBean() {
         try {
             Context jndi = new InitialContext();
@@ -163,10 +183,18 @@ public class EmailController extends AbstractController {
         return emailPageBean;
     }
     
+    /**
+     * Returns contact DAO bean. Important method due to testing reasons
+     * @return 
+     */
     protected ContactDAO getContactDAO() {
         return contactDAO;
     }
     
+    /**
+     * Returns email DAO bean. Important for tests
+     * @return 
+     */
     protected EmailDAO getEmailDAO() {
         return emailDAO;
     }

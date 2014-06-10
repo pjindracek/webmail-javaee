@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.vse.webmail.utils;
 
 /**
- *
+ * Exception indicating duplicate email in the DB
  * @author Petr
  */
 public class DuplicateEmailException extends RuntimeException {

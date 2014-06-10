@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.vse.webmail.web;
 
 import cz.vse.webmail.UserDAO;
@@ -16,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- *
+ * Controller managing requests considering user
  * @author Petr
  */
 public class UserController extends AbstractController {
@@ -34,23 +28,35 @@ public class UserController extends AbstractController {
     @EJB(beanName = "UserDAOBean")
     private UserDAO userDAO;
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getDefaultAction() {
         return ACTION_DEFAULT;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = getAction(request);
@@ -137,6 +143,10 @@ public class UserController extends AbstractController {
                 && StringUtils.isNotBlank(user.getPassword());
     }
     
+    /**
+     * Return user DAO bean
+     * @return user DAO
+     */
     public UserDAO getUserDAO() {
         return userDAO;
     }

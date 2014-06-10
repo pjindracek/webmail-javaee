@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.vse.webmail.web;
 
 import cz.vse.webmail.domain.User;
 import javax.servlet.FilterChain;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mock.web.MockFilterChain;
@@ -17,7 +10,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 /**
- *
+ * Tests of authentication filter
  * @author Petr
  */
 public class AuthenticationFilterTest {
@@ -27,6 +20,9 @@ public class AuthenticationFilterTest {
     private MockHttpServletResponse response;
     private FilterChain chain;
       
+    /**
+     * Sets up helper objects
+     */
     @Before
     public void setUp() {
         filter = new AuthenticationFilter();
@@ -36,7 +32,8 @@ public class AuthenticationFilterTest {
     }
     
     /**
-     * Test of doFilter method, of class AuthenticationFilter.
+     * Test of doFilter method, of class AuthenticationFilter for not authenticated
+     * user
      */
     @Test
     public void testDoFilterFail() throws Exception {
@@ -44,6 +41,10 @@ public class AuthenticationFilterTest {
         assertEquals(302, response.getStatus());
     }
     
+    /**
+     * Test of doFilter method, of class AuthenticationFilter for authenticated
+     * user
+     */
     @Test
     public void testDoFilterSuccess() throws Exception {
         request.getSession().setAttribute("user", new User());

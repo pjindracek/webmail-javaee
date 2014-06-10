@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.vse.webmail.web;
 
 import cz.vse.webmail.ContactDAO;
@@ -23,7 +17,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 /**
- *
+ * Tests of the ContactController
  * @author Petr
  */
 public class ContactControllerTest {
@@ -35,6 +29,9 @@ public class ContactControllerTest {
     private ContactDAO contactDAO;
     private ContactGateway contactGateway;
     
+    /**
+     * Initializing helper objects
+     */
     @Before
     public void setUp() {
         controller = new ContactControllerStub();
@@ -42,6 +39,10 @@ public class ContactControllerTest {
         response = new MockHttpServletResponse();
     }
 
+    /**
+     * Test of the DEFAULT action
+     * @throws Exception 
+     */
     @Test
     public void testProcessRequest_DEFAULT() throws Exception {
         request.setPathInfo("/" + ContactController.ACTION_DEFAULT);
@@ -49,6 +50,10 @@ public class ContactControllerTest {
         assertEquals("/WEB-INF/" + ContactController.ACTION_DEFAULT + ".jsp", response.getForwardedUrl());
     }
     
+    /**
+     * Test of the CREATE action
+     * @throws Exception 
+     */
     @Test
     public void testProcessRequest_CREATE() throws Exception {
         request.setPathInfo("/" + ContactController.ACTION_CREATE);
@@ -56,6 +61,10 @@ public class ContactControllerTest {
         assertEquals("/WEB-INF/" + ContactController.ACTION_CREATE + ".jsp", response.getForwardedUrl());
     }
     
+    /**
+     * Test of the PUT action
+     * @throws Exception 
+     */
     @Test
     public void testProcessRequest_PUT() throws Exception {
         request.setPathInfo("/" + ContactController.ACTION_PUT);
@@ -66,6 +75,10 @@ public class ContactControllerTest {
         assertEquals(302, response.getStatus());
     }
     
+    /**
+     * Test of the UPDATE action
+     * @throws Exception 
+     */
     @Test
     public void testProcessRequest_UPDATE() throws Exception {
         request.setPathInfo("/" + ContactController.ACTION_UPDATE);
@@ -74,6 +87,10 @@ public class ContactControllerTest {
         assertEquals("/WEB-INF/" + ContactController.ACTION_UPDATE + ".jsp", response.getForwardedUrl());
     }
     
+    /**
+     * Test of the POST action
+     * @throws Exception 
+     */
     @Test
     public void testProcessRequest_POST() throws Exception {
         request.setPathInfo("/" + ContactController.ACTION_POST);
@@ -85,6 +102,10 @@ public class ContactControllerTest {
         assertEquals(302, response.getStatus());
     }
 
+    /**
+     * Stub object of the ContactController class. It is necessary to mock certain
+     * dependencies inside the class
+     */
     public class ContactControllerStub extends ContactController {
     
         public ContactControllerStub() {

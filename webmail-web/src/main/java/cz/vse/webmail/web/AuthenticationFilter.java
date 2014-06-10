@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.vse.webmail.web;
 
 import java.io.IOException;
@@ -17,15 +11,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Filter which solely purpose is to redirect not authenticated user to login page
  * @author Petr
  */
 public class AuthenticationFilter implements Filter {
 
+    /**
+     * Initilization method
+     * @param filterConfig filter configuration
+     * @throws ServletException 
+     */
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
 
+    /**
+     * Methods filtering request and response
+     * @param request HTTP request
+     * @param response HTTP response
+     * @param chain given chain of the filters
+     * @throws IOException
+     * @throws ServletException 
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
@@ -42,6 +49,9 @@ public class AuthenticationFilter implements Filter {
         return request.getSession().getAttribute("user") != null;
     }
 
+    /**
+     * Method clean ups the filter after filtering.
+     */
     @Override
     public void destroy() {
     }

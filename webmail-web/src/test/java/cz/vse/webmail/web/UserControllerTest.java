@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.vse.webmail.web;
 
 import cz.vse.webmail.UserDAO;
@@ -20,7 +14,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 /**
- *
+ * Tests of the UserController
  * @author Petr
  */
 public class UserControllerTest {
@@ -32,6 +26,9 @@ public class UserControllerTest {
     private User user;
     private UserDAO userDAO;
     
+    /**
+     * Initializes the helper objects
+     */
     @Before
     public void setUp() {
         controller = new UserControllerStub();
@@ -39,6 +36,10 @@ public class UserControllerTest {
         response = new MockHttpServletResponse();
     }
 
+    /**
+     * Test of the DEFAULT action
+     * @throws Exception 
+     */
     @Test
     public void testProcessRequest_DEFAULT() throws Exception {
         request.setPathInfo("/" + UserController.ACTION_DEFAULT);
@@ -46,6 +47,10 @@ public class UserControllerTest {
         assertEquals("/WEB-INF/" + UserController.ACTION_DEFAULT + ".jsp", response.getForwardedUrl());
     }
     
+    /**
+     * Test of the SEND action
+     * @throws Exception 
+     */
     @Test
     public void testProcessRequest_SEND() throws Exception {
         request.setPathInfo("/" + UserController.ACTION_SEND);
@@ -56,6 +61,10 @@ public class UserControllerTest {
         assertFalse(request.getSession().getAttribute("user") == null);
     }
     
+    /**
+     * Test of the LOGOUT action
+     * @throws Exception 
+     */
     @Test
     public void testProcessRequest_LOGOUT() throws Exception {
         request.setPathInfo("/" + UserController.ACTION_LOGOUT);
@@ -64,6 +73,10 @@ public class UserControllerTest {
         assertEquals(302, response.getStatus());
     }
     
+    /**
+     * Test of the SIGNUP action
+     * @throws Exception 
+     */
     @Test
     public void testProcessRequest_SIGNUP() throws Exception {
         request.setPathInfo("/" + UserController.ACTION_SIGNUP);
@@ -71,6 +84,10 @@ public class UserControllerTest {
         assertEquals("/WEB-INF/" + UserController.ACTION_SIGNUP + ".jsp", response.getForwardedUrl());
     }
     
+    /**
+     * Test of the PUT action with valid data
+     * @throws Exception 
+     */
     @Test
     public void testProcessRequest_PUT_success() throws Exception {
         request.setPathInfo("/" + UserController.ACTION_PUT);
@@ -83,6 +100,10 @@ public class UserControllerTest {
         assertEquals(302, response.getStatus());
     }
     
+    /**
+     * Test of the PUT action with invalid data
+     * @throws Exception 
+     */
     @Test
     public void testProcessRequest_PUT_fail() throws Exception {
         request.setPathInfo("/" + UserController.ACTION_PUT);
@@ -95,6 +116,10 @@ public class UserControllerTest {
         assertEquals("/WEB-INF/" + UserController.ACTION_SIGNUP + ".jsp", response.getForwardedUrl());
     }
     
+    /**
+     * Test of the UPDATE action
+     * @throws Exception 
+     */
     @Test
     public void testProcessRequest_UPDATE() throws Exception {
         request.setPathInfo("/" + UserController.ACTION_UPDATE);
@@ -102,6 +127,10 @@ public class UserControllerTest {
         assertEquals("/WEB-INF/" + UserController.ACTION_UPDATE + ".jsp", response.getForwardedUrl());
     }
     
+    /**
+     * Test of the POST action
+     * @throws Exception 
+     */
     @Test
     public void testProcessRequest_POST() throws Exception {
         request.getSession().setAttribute("user", user);
@@ -117,6 +146,10 @@ public class UserControllerTest {
         assertEquals(302, response.getStatus());
     }
  
+     /**
+     * Stub object of the UserController class. It is necessary to mock certain
+     * dependencies inside the class
+     */
     public class UserControllerStub extends UserController {
         
         public UserControllerStub() {

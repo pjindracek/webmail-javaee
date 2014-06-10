@@ -34,6 +34,9 @@ public class EmailControllerTest {
     private MockHttpServletRequest request;
     private MockHttpServletResponse response;
     
+    /**
+     * Initialize helper objects
+     */
     @Before
     public void setUp() {
         controller = new EmailControllerStub();
@@ -41,6 +44,10 @@ public class EmailControllerTest {
         response = new MockHttpServletResponse();
     }
 
+    /**
+     * Test of the DEFAULT action
+     * @throws Exception 
+     */
     @Test
     public void testProcessRequest_DEFAULT() throws Exception {
         request.setPathInfo("/" + EmailController.ACTION_DEFAULT);
@@ -48,6 +55,10 @@ public class EmailControllerTest {
         assertEquals("/WEB-INF/" + EmailController.ACTION_DEFAULT + ".jsp", response.getForwardedUrl());
     }
     
+    /**
+     * Test of the COMPOSE action
+     * @throws Exception 
+     */
     @Test
     public void testProcessRequest_COMPOSE() throws Exception {
         request.setPathInfo("/" + EmailController.ACTION_COMPOSE);
@@ -55,6 +66,10 @@ public class EmailControllerTest {
         assertEquals("/WEB-INF/" + EmailController.ACTION_COMPOSE + ".jsp", response.getForwardedUrl());
     }
     
+    /**
+     * Test of the DETAIL action
+     * @throws Exception 
+     */
     @Test
     public void testProcessRequest_DETAIL() throws Exception {
         request.setPathInfo("/" + EmailController.ACTION_DETAIL);
@@ -63,6 +78,10 @@ public class EmailControllerTest {
         assertEquals("/WEB-INF/" + EmailController.ACTION_DETAIL + ".jsp", response.getForwardedUrl());
     }
     
+    /**
+     * Test of the SEND action
+     * @throws Exception 
+     */
     @Test
     public void testProcessRequest_SEND() throws Exception {
         request.setPathInfo("/" + EmailController.ACTION_SEND);
@@ -75,6 +94,10 @@ public class EmailControllerTest {
         assertEquals(302, response.getStatus());
     }
     
+    /**
+     * Test of the FILTER action
+     * @throws Exception 
+     */
     @Test
     public void testProcessRequest_FILTER() throws Exception {
         request.setPathInfo("/" + EmailController.ACTION_FILTER);
@@ -82,6 +105,10 @@ public class EmailControllerTest {
         assertEquals("/WEB-INF/" + EmailController.ACTION_DEFAULT + ".jsp", response.getForwardedUrl());
     }
  
+    /**
+     * Stub object of the EmailController class. It is necessary to mock certain
+     * dependencies inside the class
+     */
     public class EmailControllerStub extends EmailController {
         
         private User user;

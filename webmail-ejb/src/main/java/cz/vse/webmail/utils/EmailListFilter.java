@@ -1,23 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.vse.webmail.utils;
 
 /**
- *
+ * Filter used for searching of emails
  * @author Petr
  */
 public class EmailListFilter {
     
     private String to;
 
+    /**
+     * Gets receiver of an email
+     * @return receiver's email address
+     */
     public String getTo() {
         return to;
     }
 
+    /**
+     * Sets receiver of an email
+     * @param to receiver's email address
+     */
     public void setTo(String to) {
         this.to = to;
     }

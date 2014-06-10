@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.vse.webmail;
 
 import cz.vse.webmail.domain.Email;
@@ -23,7 +17,7 @@ import javax.mail.internet.MimeMessage;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- *
+ * Operations over Email entity connected with the given User.
  * @author Petr
  */
 @Stateful
@@ -37,6 +31,9 @@ public class EmailBean {
     private Email email;
     private User user;
 
+    /**
+     * Sends email which was previously added to this bean.
+     */
     public void sendEmail() {
         try {
             Message message = new MimeMessage(mailSessionFactoryBean.getMailSession());
@@ -63,30 +60,58 @@ public class EmailBean {
         }      
     }
     
+    /**
+     * Returns found emails of set user based on the settings in the filter
+     * @param filter given email filter
+     * @return found emails
+     */
     public List<Email> getFilteredEmails(EmailListFilter filter) {
         return filter != null ? emailDAO.getFilteredEmails(user, filter) : null;
     }
     
+    /**
+     * Gets all emails of current user
+     * @return emails of user
+     */
     public List<Email> getEmailsOfUser() {
         return emailDAO.getEmailsOfUser(user);
     }
 
+    /**
+     * Returns User of this bean
+     * @return user
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Sets user to this bean.
+     * @param user user
+     */
     public void setUser(User user) {
         this.user = user;
     }
     
+    /**
+     * Returns email set to this group
+     * @return 
+     */
     public Email getEmail() {
         return email;
     }
 
+    /**
+     * Sets email to this bean
+     * @param email 
+     */
     public void setEmail(Email email) {
         this.email = email;
     }
     
+    /**
+     * Cleans up resources before removal of this bean
+     */
     @Remove
     public void close() {
         emailDAO.saveEmail(email);

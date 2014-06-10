@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.vse.webmail;
 
 import cz.vse.webmail.domain.Contact;
@@ -12,15 +6,24 @@ import java.util.List;
 import javax.ejb.Local;
 
 /**
- *
+ * DAO for operations with Contact entity.
  * @author Petr
  */
 @Local
 public interface ContactDAO {
     
+    /**
+     * Get all contacts of particular user
+     * @param user user
+     * @return all contatcs of user
+     */
     public List<Contact> getContactsOfUser(User user);
     
-    public Contact findContact(User user, String email);
-    
+    /**
+     * Find contact of user with given ID
+     * @param user user
+     * @param contactId id of searched contact
+     * @return found contact
+     */
     public Contact findContact(User user, Integer contactId);
 }
