@@ -27,11 +27,15 @@ public class UserDAOBean implements UserDAO {
     
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    public void addUser(User user) throws DuplicateEmailException {
-        if (findUser(user.getEmail()) != null) {
-            throw new DuplicateEmailException("User with this email already exists: " + user.getEmail());
+    public void addOrUpdateUser(User user) throws DuplicateEmailException {
+        if (user.getId() == null) {
+            if (findUser(user.getEmail()) != null) {
+                throw new DuplicateEmailException("User with this email already exists: " + user.getEmail());
+            }
+            entityManager.persist(user);
+        } else {
+            entityManager.merge(user);
         }
-        entityManager.persist(user);
     }
     
     @Override
@@ -46,11 +50,5 @@ public class UserDAOBean implements UserDAO {
         List<User> result = entityManager.createQuery("from User u where u.email like :email and u.password like :password", User.class)
                 .setParameter("email", email).setParameter("password", password).getResultList();
         return result.size() == 1 ? result.get(0) : null;
-    }
-    
-    @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    public void updateUser(User user) {
-        entityManager.merge(user);
     }
 }

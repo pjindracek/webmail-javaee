@@ -26,7 +26,6 @@ public class Contact implements Serializable {
     private Integer id;
     private String name;
     private String surname;
-    @Column(unique = true)
     private String email;
     @ManyToOne
     private User owner;

@@ -1,0 +1,6 @@
+/webmail-ear/target
+/webmail-ear/nb-configuration.xml
+/webmail-web/target
+/webmail-web/nb-configuration.xml
+/webmail-ejb/target
+/webmail-ejb/nb-configuration.xml

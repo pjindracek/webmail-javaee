@@ -3,11 +3,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <%@include file="/WEB-INF/htmlHeadCommon.jspf" %>
+        <title>Webmail</title>
     </head>
     <body>
-        
-        <a href="user/login">Login</a> or <a href="user/signup">Signup</a>
+        <%@include file="/WEB-INF/header.jspf" %>
+        <div class="container">
+            <a href="user/login">Login</a> or <a href="user/signup">Signup</a>
+        </div>
     </body>
 </html>

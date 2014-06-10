@@ -57,50 +57,53 @@ public class UserController extends AbstractController {
         if (ACTION_DEFAULT.equals(action)) {
             dispatch(request, response, action);
         } else if (ACTION_SEND.equals(action)) {
-            if(processUserAuthentication(request)) {
-                response.sendRedirect(request.getContextPath() + EmailController.CONTROLLER_PATH + EmailController.ACTION_DEFAULT);
-            } else {
-                dispatch(request, response, ACTION_DEFAULT);
-            }
+            loginUser(request, response);
         } else if (ACTION_LOGOUT.equals(action)) {
             logoutUser(request);
             response.sendRedirect(request.getContextPath() + UserController.CONTROLLER_PATH + ACTION_DEFAULT);
         } else if (ACTION_SIGNUP.equals(action)) {
             dispatch(request, response, ACTION_SIGNUP);
         } else if (ACTION_PUT.equals(action)) {
-            User user = assembleUser(request);
-            request.setAttribute("user", user);
-            if (isValid(user)) {
-                try {
-                    getUserDAO().addUser(user);
-                    response.sendRedirect(request.getContextPath() + EmailController.CONTROLLER_PATH + EmailController.ACTION_DEFAULT);
-                } catch (Exception e) {
-                    request.setAttribute("error", "Such email already exists.");
-                    dispatch(request, response, ACTION_SIGNUP);
-                }
-            } else {
-                request.setAttribute("error", "All fields have to be filled in");
-                dispatch(request, response, ACTION_SIGNUP);
-            }
+            processPutOrPost(request, response, assembleUser(request), ACTION_SIGNUP);
         } else if (ACTION_UPDATE.equals(action)) {
             request.setAttribute("user", getCurrentUser(request));
             dispatch(request, response, action);
         } else if (ACTION_POST.equals(action)) {
-            User user = assembleUser(request);
-            if (isValid(user)) {
-                getUserDAO().updateUser(user);
+            processPutOrPost(request, response, assembleUser(request, getCurrentUser(request)), ACTION_UPDATE);
+        }
+    }
+    
+    private void processPutOrPost(HttpServletRequest request, HttpServletResponse response, User user, String failureAction) throws IOException, ServletException {
+        request.setAttribute("user", user);
+        if (isValid(user)) {
+            try {
+                getUserDAO().addOrUpdateUser(user);
                 refreshUserInSession(request, user);
                 response.sendRedirect(request.getContextPath() + EmailController.CONTROLLER_PATH + EmailController.ACTION_DEFAULT);
-            } else {
-                 request.setAttribute("error", "All fields have to be filled in");
-                 request.setAttribute("user", user);
-                 dispatch(request, response, ACTION_SIGNUP);
+            } catch (Exception e) {
+                request.setAttribute("error", "Such email already exists.");
+                dispatch(request, response, failureAction);
             }
+        } else {
+            request.setAttribute("error", "All fields have to be filled in");
+            dispatch(request, response, failureAction);
         }
     }
 
+    private void loginUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        if(processUserAuthentication(request)) {
+            response.sendRedirect(request.getContextPath() + EmailController.CONTROLLER_PATH + EmailController.ACTION_DEFAULT);
+        } else {
+            request.setAttribute("error", "Access denied!");
+            dispatch(request, response, ACTION_DEFAULT);
+        }
+    }
+    
     private User assembleUser(HttpServletRequest request) {
-        User user = new User();
+        return assembleUser(request, new User());
+    }
+    
+    private User assembleUser(HttpServletRequest request, User user) {
         user.setEmail(request.getParameter("email"));
         user.setName(request.getParameter("name"));
         user.setSurname(request.getParameter("surname"));

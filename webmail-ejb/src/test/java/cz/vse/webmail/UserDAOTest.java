@@ -84,22 +84,6 @@ public class UserDAOTest {
 //        fail("The test case is a prototype.");
     }
 
-    public class UserDAOImpl implements UserDAO {
-
-        public void addUser(User user) throws DuplicateEmailException {
-        }
-
-        public User findUser(String email) {
-            return null;
-        }
-
-        public User findUser(String email, String password) {
-            return null;
-        }
-        
-        public void updateUser(User user) {
-            
-        }
-    }
+    
     
 }

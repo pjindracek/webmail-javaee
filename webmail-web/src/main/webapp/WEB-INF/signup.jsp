@@ -3,20 +3,41 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <%@include file="htmlHeadCommon.jspf" %>
+        <title>Sign up</title>
     </head>
     <body>
         <%@include file="header.jspf" %>
-        <c:if test="${not empty error}"><p>${error}</p></c:if>
-        <form method="post" action="putUser">
-            Name <input type="text" name="name" value=""/><br/>            
-            Surname <input type="text" name="surname" value=""/><br/>            
-            Email <input type="text" name="email" value=""/><br/>                      
-            Password <input type="password" name="password" value=""/><br/>
-            Password <input type="password" name="passwordconf" value=""/><br/>
-            <input type="submit" value="Send"/>
-        </form>
-        <p>or <a href="user/login">Login</a></p>
+        <div class="container">
+            <c:if test="${not empty error}"><p>${error}</p></c:if>
+            <form method="post" action="putUser" class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Name</label>
+                    <div class="col-md-4"><input type="text" name="name" class="form-control" value="${user.name}"/></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Surname</label>
+                    <div class="col-md-4"><input type="text" name="surname" class="form-control" value="${user.surname}"/></div>            
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email</label>
+                    <div class="col-md-4"><input type="text" name="email" value="${user.email}" class="form-control" /></div>                      
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Password</label>
+                    <div class="col-md-4"><input type="password" class="form-control" name="password" value=""/></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Confirmation</label>
+                    <div class="col-md-4"><input type="password" class="form-control" name="passwordconf" value=""/></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-4">
+                        <input type="submit" value="Send" class="btn btn-default"/>
+                    </div>
+                </div>
+            </form>
+            <p>or <a href="${pageContext.request.contextPath}/auth/user/login">Login</a></p>
+        </div>
     </body>
 </html>

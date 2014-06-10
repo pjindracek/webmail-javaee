@@ -41,16 +41,13 @@ public class AuthenticationFilterTest {
     @Test
     public void testDoFilterFail() throws Exception {
         filter.doFilter(request, response, chain);
-        assertTrue(request.getAttribute("error") != null);
         assertEquals(302, response.getStatus());
-        request.getSession().setAttribute("user", new User());
     }
     
     @Test
     public void testDoFilterSuccess() throws Exception {
         request.getSession().setAttribute("user", new User());
         filter.doFilter(request, response, chain);
-        assertTrue(request.getAttribute("error") == null);
         assertEquals(200, response.getStatus());
     }
 }

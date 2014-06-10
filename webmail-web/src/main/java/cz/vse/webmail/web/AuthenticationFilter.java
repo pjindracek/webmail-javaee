@@ -31,7 +31,6 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         if (!isUserAuthenticated(httpRequest)) {
-            httpRequest.setAttribute("error", "Access denied: You are not logged in!");
             httpResponse.sendRedirect(httpRequest.getContextPath() + UserController.CONTROLLER_PATH);
         } else {
             chain.doFilter(request, response);

@@ -3,17 +3,32 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <%@include file="htmlHeadCommon.jspf" %>
+        <title>Create contact</title>
     </head>
     <body>
         <%@include file="header.jspf" %>
-        <c:if test="${not empty error}"><p>${error}</p></c:if>
-        <form method="post" action="putContact">
-            Name: <input type="text" name="name" /><br/>
-            Surname: <input type="text" name="surname"/><br/>
-            Email: <input type="text" name="email"/><br/>
-            <input type="submit" value="Send"/>
-        </form>
+        <div class="container">
+            <c:if test="${not empty error}"><p>${error}</p></c:if>
+            <form method="post" action="putContact" class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Name</label>
+                    <div class="col-md-4"><input type="text" name="name" class="form-control" /></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Surname</label>
+                    <div class="col-md-4"><input type="text" name="surname" class="form-control" /></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email</label>
+                    <div class="col-md-4"><input type="text" name="email" class="form-control" /></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-4">
+                        <input type="submit" value="Send" class="btn btn-default"/>
+                    </div>
+                </div>
+            </form>
+        </div>
     </body>
 </html>

@@ -3,27 +3,29 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <%@include file="htmlHeadCommon.jspf" %>
+        <title>Contact list</title>
     </head>
     <body>
         <%@include file="header.jspf" %>
-        <h2>Contact list</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Surname, Name</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${contacts}" var="con">
+        <div class="container">
+            <h2>Contact list</h2>
+            <table class="table">
+                <thead>
                     <tr>
-                        <td><a href="contactDetail?id=${con.id}">${con.surname}, ${con.name}</a></td>
-                        <td>${con.email}</td>
+                        <th>Surname, Name</th>
+                        <th>Email</th>
                     </tr>
-                </c:forEach>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <c:forEach items="${contacts}" var="con">
+                        <tr>
+                            <td><a href="contactDetail?id=${con.id}">${con.surname}, ${con.name}</a></td>
+                            <td>${con.email}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>

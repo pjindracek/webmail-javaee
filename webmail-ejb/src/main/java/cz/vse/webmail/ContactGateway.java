@@ -42,7 +42,7 @@ public class ContactGateway {
     
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void addOrUpdateContact(Contact contact) {
-        if (contact.getId() != null) {
+        if (contact.getId() == null) {
             entityManager.persist(contact);
             this.contact = contact;
         } else {

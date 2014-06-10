@@ -17,9 +17,7 @@ import javax.ejb.Local;
 @Local
 public interface UserDAO {
     
-    public void addUser(User user) throws DuplicateEmailException;
-    
-    public void updateUser(User user);
+    public void addOrUpdateUser(User user) throws DuplicateEmailException;
     
     public User findUser(String email);
     

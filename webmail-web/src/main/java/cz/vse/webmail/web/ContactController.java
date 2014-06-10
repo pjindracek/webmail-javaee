@@ -106,7 +106,7 @@ public class ContactController extends AbstractController {
     }
     
     private ContactPageBean getContactPageBean(HttpServletRequest request) {
-        ContactPageBean contactPageBean = (ContactPageBean) request.getAttribute(SESSION_CONTACT_PAGE_BEAN);
+        ContactPageBean contactPageBean = (ContactPageBean) request.getSession().getAttribute(SESSION_CONTACT_PAGE_BEAN);
         if (contactPageBean == null) {
             contactPageBean = initializeContactPageBean(request);
         }
