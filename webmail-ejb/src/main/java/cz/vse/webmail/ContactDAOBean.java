@@ -24,7 +24,8 @@ public class ContactDAOBean implements ContactDAO {
     
     @Override
     public Contact findContact(User user, Integer contactId) {
-        return entityManager.createQuery("from Contact c where c.owner = :user and c.id = :id", Contact.class)
-                .setParameter("id", contactId).setParameter("user", user).getSingleResult();
+        List<Contact> contacts = entityManager.createQuery("from Contact c where c.owner = :user and c.id = :id", Contact.class)
+                .setParameter("id", contactId).setParameter("user", user).getResultList();
+        return contacts.size() == 1 ? contacts.get(0) : null;
     }
 }

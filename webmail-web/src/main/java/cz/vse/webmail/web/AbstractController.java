@@ -19,11 +19,8 @@ public abstract class AbstractController extends HttpServlet {
      * @return action name or default action name if none is present
      */
     public String getAction(HttpServletRequest request) {
-        String path = request.getPathInfo();
-        if (path != null && path.length() > 1) {
-            return path.substring(1).split("/")[0];
-        } 
-        return getDefaultAction();
+        String path = request.getPathInfo(); //path from getPathInfo starts with slash
+        return path != null && path.length() > 1 ? path.substring(1).split("/")[0] : getDefaultAction();
     }
     
     /**

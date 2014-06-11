@@ -12,7 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- * Makes easier access to Contact entity
+ * Makes easier operations with Contact entity
  * @author Petr
  */
 @Stateful

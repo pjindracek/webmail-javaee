@@ -23,7 +23,7 @@ public interface ContactDAO {
      * Find contact of user with given ID
      * @param user user
      * @param contactId id of searched contact
-     * @return found contact
+     * @return found contact or null if nothing matched
      */
     public Contact findContact(User user, Integer contactId);
 }
