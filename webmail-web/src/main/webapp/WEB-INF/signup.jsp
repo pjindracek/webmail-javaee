@@ -39,5 +39,6 @@
             </form>
             <p>or <a href="${pageContext.request.contextPath}/auth/user/login">Login</a></p>
         </div>
+        <%@include file="footer.jspf" %>
     </body>
 </html>

@@ -36,5 +36,6 @@
                 </tr>
             </table>
         </div>
+        <%@include file="footer.jspf" %>
     </body>
 </html>

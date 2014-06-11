@@ -1,0 +1,6 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<div class="container">
+    <hr/>
+    <footer><p>Webmail 1.0, University of Economics in Prague, 4IT447, Petr Jindracek, 2014</p></footer>
+</div>

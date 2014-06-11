@@ -11,5 +11,6 @@
         <div class="container">
             <a href="user/login">Login</a> or <a href="user/signup">Signup</a>
         </div>
+        <%@include file="/WEB-INF/footer.jspf" %>
     </body>
 </html>
